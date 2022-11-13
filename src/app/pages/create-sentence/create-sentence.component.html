@@ -10,19 +10,14 @@
     <div class="col-sm-12 col-md-4 mb-3">
         <label for="word-type"> Choose Word Type </label>
         <select id="word-type" class="form-control">
-            <option value="">Noun</option>
-            <option value="">Verb</option>
-            <option value="">Adjecctive</option>
+            <option *ngFor="let word_type of wordTypes" value="{{ word_type.id }}"> {{ word_type.word_type }}</option>
         </select>
     </div>   
 
     <div class="col-sm-12 col-md-8 mb-3">
         <label for="word-type"> Available Words: </label>
         <div class="bg-light p-3">
-            <span class="badge text-bg-secondary p-2 mr-2 available-word">Secondary</span>
-            <span class="badge text-bg-secondary p-2 mr-2 available-word">Secondary</span>
-            
-
+            <span class="badge text-bg-secondary p-2 mr-2 available-word" *ngFor="let word of words">{{ word.word }}</span>            
         </div>
     </div>    
 </div>
