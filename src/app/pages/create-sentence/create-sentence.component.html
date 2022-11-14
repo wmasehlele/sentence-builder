@@ -1,23 +1,28 @@
 
 <div class="row">
     <div class="col-12 mb-3">
-        <p class="py-4 bg-light">
-
-        </p>
+        <div class="d-flex p-2 justify-content-between bg-light">
+            <p class="px-3 w-100">
+                {{ new_sentence.trim() }}
+            </p>
+            <div>
+                <button type="button" class="btn btn-success p-2" (click)="submitSentence()">Submit</button>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-12 col-md-4 mb-3">
         <label for="word-type"> Choose Word Type </label>
-        <select id="word-type" class="form-control">
-            <option *ngFor="let word_type of wordTypes" value="{{ word_type.id }}"> {{ word_type.word_type }}</option>
+        <select id="word-type" class="form-control" (ngModel)="word_type_id" (change)="onChooseWordChange($event)" >
+            <option *ngFor="let word_type of wordTypes" [value]="word_type.id"> {{ word_type.word_type }}</option>
         </select>
     </div>   
 
     <div class="col-sm-12 col-md-8 mb-3">
         <label for="word-type"> Available Words: </label>
-        <div class="bg-light p-3">
-            <span class="badge text-bg-secondary p-2 mr-2 available-word" *ngFor="let word of words">{{ word.word }}</span>            
+        <div class="bg-light px-3 py-4">
+            <span class="badge text-bg-secondary p-2 mr-2 available-word" *ngFor="let word of words" (click)="buildNewSentence(word.word)">{{ word.word }}</span>            
         </div>
     </div>    
 </div>

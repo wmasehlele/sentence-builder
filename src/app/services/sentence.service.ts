@@ -23,14 +23,22 @@ export class SentenceService {
   constructor(private http: HttpClient) { }
 
   getSentences(): Observable<Sentence[]>{
-    return this.http.get<Sentence[]>(this.apiUrl + "/sentences");
+    return this.http.get<Sentence[]>(this.apiUrl + "/sentence/list");
   }
 
   getWordTypes(): Observable<WordType[]> {
-    return this.http.get<WordType[]>(this.apiUrl + "/word-types");
+    return this.http.get<WordType[]>(this.apiUrl + "/sentence/word-types");
   }
 
   getWordsByType(word_type_id: number): Observable<Word[]> {
-    return this.http.get<Word[]>(this.apiUrl + "/words-by-type/" + word_type_id);
+    return this.http.get<Word[]>(this.apiUrl + "/sentence/words-by-type/" + word_type_id);
   }  
+
+  saveSentence(sentence: string): Observable<Sentence[]> {
+    let data = {
+      "sentence": sentence 
+    };
+    return this.http.post<Sentence[]>(this.apiUrl + "/sentence/save-sentence", data, httpOptions);
+  }    
+
 }

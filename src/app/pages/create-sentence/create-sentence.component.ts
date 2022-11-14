@@ -10,37 +10,10 @@ import { SentenceService } from 'src/app/services/sentence.service';
 })
 export class CreateSentenceComponent implements OnInit {
 
-  words: Word[] = [
-    {
-      "id": 1,
-      "word_type_id": 1,
-      "word": "The"
-    },
-    {
-      "id": 2,
-      "word_type_id": 1,
-      "word": "Moment"
-    },
-    {
-      "id": 3,
-      "word_type_id": 1,
-      "word": "Hello"
-    }           
-  ];
-  wordTypes: WordType[] = [
-    {
-      "id": 1,
-      "word_type": "Noun"
-    },
-    {
-      "id": 2,
-      "word_type": "Preposition"
-    },
-    {
-      "id": 3,
-      "word_type": "Verb"
-    }     
-  ];
+  words: Word[] = [];
+  wordTypes: WordType[] = [];
+  word_type_id: number = 0; 
+  new_sentence: string = "";
 
   constructor(private sentenceService: SentenceService) { }
 
@@ -48,7 +21,27 @@ export class CreateSentenceComponent implements OnInit {
     this.sentenceService.getWordTypes().subscribe((wordTypes) => { this.wordTypes = wordTypes; });    
   }
 
-  getWordsByType(word_type: WordType) {
-    this.sentenceService.getWordsByType(word_type.id).subscribe((words) => { this.words = words; });
+  getWordsByType(word_type_id: number) {
+    this.sentenceService.getWordsByType(word_type_id).subscribe((words) => { this.words = words; });
   } 
+
+  onChooseWordChange(event: any){
+    this.word_type_id = event.target.value;
+    this.getWordsByType(this.word_type_id);
+  }
+
+  buildNewSentence(word: string){
+    this.new_sentence = this.new_sentence + " " + word;
+  }
+
+  submitSentence(){
+    if (!this.new_sentence.length){
+      alert("Cannot submit blank sentence");
+      return;
+    }
+
+    this.sentenceService.saveSentence(this.new_sentence.trim()).subscribe(() => { 
+      this.new_sentence = "";
+    });    
+  }
 }
