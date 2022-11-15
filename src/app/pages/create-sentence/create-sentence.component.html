@@ -1,9 +1,8 @@
-
 <div class="row">
     <div class="col-12 mb-3">
         <div class="d-flex p-2 justify-content-between bg-light">
             <p class="px-3 w-100">
-                {{ new_sentence.trim() }}
+                {{ new_sentence }}
             </p>
             <div>
                 <button type="button" class="btn btn-success p-2" (click)="submitSentence()">Submit</button>
@@ -22,7 +21,7 @@
     <div class="col-sm-12 col-md-8 mb-3">
         <label for="word-type"> Available Words: </label>
         <div class="bg-light px-3 py-4">
-            <span class="badge text-bg-secondary p-2 mr-2 available-word" *ngFor="let word of words" (click)="buildNewSentence(word.word)">{{ word.word }}</span>            
+            <span class="badge text-bg-secondary p-2 m-2 available-word" *ngFor="let word of words" (click)="buildNewSentence(word)">{{ word.word }}</span>            
         </div>
     </div>    
 </div>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 import { Word } from 'src/app/models/Word';
 import { WordType } from 'src/app/models/WordType';
 import { SentenceService } from 'src/app/services/sentence.service';
+import { HelperService } from 'src/app/services/helper.service';
+import { Sentence } from 'src/app/models/Sentence';
 
 @Component({
   selector: 'app-create-sentence',
@@ -15,14 +18,30 @@ export class CreateSentenceComponent implements OnInit {
   word_type_id: number = 0; 
   new_sentence: string = "";
 
-  constructor(private sentenceService: SentenceService) { }
+  constructor(private sentenceService: SentenceService, private router: Router, private helperService: HelperService) { }
 
   ngOnInit(): void {
-    this.sentenceService.getWordTypes().subscribe((wordTypes) => { this.wordTypes = wordTypes; });    
+    this.sentenceService.getWordTypes().subscribe({
+      next: (wordTypes: WordType[]) => {
+        this.wordTypes = wordTypes; 
+      },
+      error: (error) => { 
+        alert((error as ErrorEvent).error.message);   
+      },
+      complete: () => {}
+    });    
   }
 
   getWordsByType(word_type_id: number) {
-    this.sentenceService.getWordsByType(word_type_id).subscribe((words) => { this.words = words; });
+    this.sentenceService.getWordsByType(word_type_id).subscribe({
+      next: (words: Word[]) => {
+        this.words = words; 
+      },
+      error: (error) => { 
+        alert((error as ErrorEvent).error.message);   
+      },
+      complete: () => {}
+    });     
   } 
 
   onChooseWordChange(event: any){
@@ -30,8 +49,12 @@ export class CreateSentenceComponent implements OnInit {
     this.getWordsByType(this.word_type_id);
   }
 
-  buildNewSentence(word: string){
-    this.new_sentence = this.new_sentence + " " + word;
+  buildNewSentence(word: Word){
+    let spacer = " ";
+    if (word.word_type_id == 10) { 
+      spacer = "";
+    }
+    this.new_sentence = this.helperService.convertToSentenceCase(this.new_sentence.trim() + spacer + word.word.trim());
   }
 
   submitSentence(){
@@ -40,8 +63,19 @@ export class CreateSentenceComponent implements OnInit {
       return;
     }
 
-    this.sentenceService.saveSentence(this.new_sentence.trim()).subscribe(() => { 
-      this.new_sentence = "";
-    });    
+    this.sentenceService.saveSentence(this.new_sentence.trim()).subscribe({
+      next: (sentence: Sentence) => {
+        if (!sentence.id){
+          alert("Failed to submit sentence, please try agina.");
+          return;
+        }
+        this.new_sentence = ""; 
+        this.router.navigate(["/"]); 
+      },
+      error: (error) => { 
+        alert((error as ErrorEvent).error.message);   
+      },
+      complete: () => {}
+    });          
   }
 }

@@ -34,11 +34,10 @@ export class SentenceService {
     return this.http.get<Word[]>(this.apiUrl + "/sentence/words-by-type/" + word_type_id);
   }  
 
-  saveSentence(sentence: string): Observable<Sentence[]> {
+  saveSentence(sentence: string): Observable<Sentence> {
     let data = {
       "sentence": sentence 
     };
-    return this.http.post<Sentence[]>(this.apiUrl + "/sentence/save-sentence", data, httpOptions);
+    return this.http.post<Sentence>(this.apiUrl + "/sentence/save-sentence", data, httpOptions);
   }    
-
 }

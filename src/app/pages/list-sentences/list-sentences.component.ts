@@ -14,6 +14,14 @@ export class ListSentencesComponent implements OnInit {
   constructor(private sentenceService: SentenceService) { }
 
   ngOnInit(): void {
-    this.sentenceService.getSentences().subscribe((sentences) => { this.sentences = sentences; });
+    this.sentenceService.getSentences().subscribe({
+      next: (sentences: Sentence[]) => {
+        this.sentences = sentences; 
+      },
+      error: (error) => { 
+        alert((error as ErrorEvent).error.message);   
+      },
+      complete: () => {}
+    });    
   }
 }
