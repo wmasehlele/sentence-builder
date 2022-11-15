@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Word } from 'src/app/models/Word';
 import { WordType } from 'src/app/models/WordType';
@@ -41,4 +41,8 @@ export class SentenceService {
     };
     return this.http.post<Sentence>(this.apiUrl + "/sentence/save-sentence", data, httpOptions);
   }    
+
+  deleteSentence(sentence_id: number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + "/sentence/delete-sentence/" + sentence_id, httpOptions);
+  }     
 }

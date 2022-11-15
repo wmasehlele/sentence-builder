@@ -1,3 +1,10 @@
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let sentence of sentences"> {{ sentence.sentence }} </li>
+    <li class="list-group-item" *ngFor="let sentence of sentences"> 
+        <div class="d-flex justify-content-between"> 
+            <span>{{ sentence.sentence }}</span>
+            <span>
+                <button class="btn btn-sm btn-danger" (click)="deleteSentence(sentence)"><i class="bi bi-trash"></i></button>
+            </span>
+        </div>
+    </li>
 </ul>
