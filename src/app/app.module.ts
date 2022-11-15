@@ -10,10 +10,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreateSentenceComponent } from './pages/create-sentence/create-sentence.component';
 import { ListSentencesComponent } from './pages/list-sentences/list-sentences.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthGuard } from './guards/auth.guard'
 
 const appRoutes: Routes = [
   { path: '', component: ListSentencesComponent },
-  { path: 'create-sentence', component: CreateSentenceComponent },
+  { path: 'create-sentence', component: CreateSentenceComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

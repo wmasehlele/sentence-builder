@@ -11,6 +11,7 @@ import { Sentence } from 'src/app/models/Sentence';
   templateUrl: './create-sentence.component.html',
   styleUrls: ['./create-sentence.component.css']
 })
+
 export class CreateSentenceComponent implements OnInit {
 
   words: Word[] = [];

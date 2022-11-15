@@ -9,6 +9,7 @@ import { Sentence } from 'src/app/models/Sentence';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'authorization': 'Bearer ' + environment.appKey
   }),
 };
 
@@ -23,15 +24,15 @@ export class SentenceService {
   constructor(private http: HttpClient) { }
 
   getSentences(): Observable<Sentence[]>{
-    return this.http.get<Sentence[]>(this.apiUrl + "/sentence/list");
+    return this.http.get<Sentence[]>(this.apiUrl + "/sentence/list", httpOptions);
   }
 
   getWordTypes(): Observable<WordType[]> {
-    return this.http.get<WordType[]>(this.apiUrl + "/sentence/word-types");
+    return this.http.get<WordType[]>(this.apiUrl + "/sentence/word-types", httpOptions);
   }
 
   getWordsByType(word_type_id: number): Observable<Word[]> {
-    return this.http.get<Word[]>(this.apiUrl + "/sentence/words-by-type/" + word_type_id);
+    return this.http.get<Word[]>(this.apiUrl + "/sentence/words-by-type/" + word_type_id, httpOptions);
   }  
 
   saveSentence(sentence: string): Observable<Sentence> {
