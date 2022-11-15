@@ -4,8 +4,9 @@
             <p class="px-3 w-100">
                 {{ new_sentence }}
             </p>
-            <div>
-                <button type="button" class="btn btn-success p-2" (click)="submitSentence()">Submit</button>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary p-2" (click)="new_sentence = ''">Erase</button>                
+                <button type="button" class="btn btn-success p-2" (click)="submitSentence()">Submit</button>                
             </div>
         </div>
     </div>
