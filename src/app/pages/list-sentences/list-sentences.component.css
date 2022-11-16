@@ -1,0 +1,18 @@
+.sentences-pagination ::ng-deep .ngx-pagination {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: end;
+    font-size: 14px;
+}
+
+.sentences-pagination ::ng-deep .ngx-pagination a:hover
+.sentences-pagination ::ng-deep .ngx-pagination .pagination-next:hover,
+.sentences-pagination ::ng-deep .ngx-pagination .pagination-next a:hover{
+    border-radius: 2px;
+}
+
+.sentences-pagination ::ng-deep .ngx-pagination .current {
+    border-radius: 2px;
+    background-color: #6c757d;
+}

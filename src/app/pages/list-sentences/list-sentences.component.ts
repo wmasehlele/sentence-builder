@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sentence } from 'src/app/models/Sentence';
 import { SentenceService } from 'src/app/services/sentence.service';
@@ -11,6 +11,11 @@ import { SentenceService } from 'src/app/services/sentence.service';
 export class ListSentencesComponent implements OnInit {
 
   sentences: Sentence[] = [];
+
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 15;
+  tableSizes: any = [5, 10, 15, 20, 25];
 
   constructor(private sentenceService: SentenceService, private router: Router) { }
 

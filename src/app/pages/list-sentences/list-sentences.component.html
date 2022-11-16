@@ -1,5 +1,5 @@
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let sentence of sentences"> 
+<ul class="list-group mb-3">
+    <li class="list-group-item" *ngFor="let sentence of sentences | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count }"> 
         <div class="d-flex justify-content-between"> 
             <span>{{ sentence.sentence }}</span>
             <span>
@@ -8,3 +8,9 @@
         </div>
     </li>
 </ul>
+
+<pagination-controls class="sentences-pagination" 
+    nextLabel=""
+    previousLabel=""
+    (pageChange)="page = $event">
+</pagination-controls>

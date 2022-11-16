@@ -3,14 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+import { AuthGuard } from './guards/auth.guard';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { CreateSentenceComponent } from './pages/create-sentence/create-sentence.component';
 import { ListSentencesComponent } from './pages/list-sentences/list-sentences.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AuthGuard } from './guards/auth.guard'
+
 
 const appRoutes: Routes = [
   { path: '', component: ListSentencesComponent },
@@ -30,6 +33,7 @@ const appRoutes: Routes = [
     NgbModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
   ],
   providers: [],
