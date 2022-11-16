@@ -5,3 +5,11 @@
 .btn-secondary{
     margin-right: 3px !important;
 }
+
+.new-sentence-actions button,
+.new-sentence-actions span {
+    margin-left: 3px;
+}
+.new-sentence-actions button {
+    border: none;
+}
