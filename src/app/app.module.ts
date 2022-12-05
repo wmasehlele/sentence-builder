@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreateSentenceComponent } from './pages/create-sentence/create-sentence.component';
 import { ListSentencesComponent } from './pages/list-sentences/list-sentences.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 
 const appRoutes: Routes = [
@@ -26,7 +28,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     CreateSentenceComponent,
     ListSentencesComponent,
-    FooterComponent
+    FooterComponent,
+    AdminComponent,
+    UploadFileComponent
   ],
   imports: [
     BrowserModule,
